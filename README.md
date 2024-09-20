@@ -7,7 +7,7 @@ Heap profiling requires running `wpr` with administrative privileges. Because th
 
 ## Prerequisites
 
-- The latest available version of *An external link was removed to protect your privacy.*.
+- The latest available version of [Windows Performance Toolkit](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install).
 
 ## Example
 
