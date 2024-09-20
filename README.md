@@ -32,3 +32,33 @@ wpa heapsnapshot.etl
     - <img src="screenshots/3.png" alt="stacks" height="100">
 
 In the `Analysis` window, you will see all snapshots created by wpr. You can expand each snapshot to see all recorded allocations that were not freed at the moment of snapshot creation. It shows the stack where the allocation happened, the number of allocations, and the size.
+
+## Using WPR to debug another application
+
+A good official example can be found [here](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/record-heap-snapshot).
+
+To make sure that all the important allocations are captured, wpr has to be started before they happen.
+
+1. Start Process Explorer or Task Manager to monitor RAM consumption and find the process PID.
+2. Start PowerShell with admin privileges to run WPR.
+3. Start your application.
+4. Run wpr to enable and start snapshot creation.
+5. Take snapshots at important points. It is also possible to enable automatic snapshot creation with ` wpr -enableperiodicsnapshot heap <frequency in seconds> <pid for foo.exe>`.
+6. Save collected data to a file.
+7. Disable the profiler.
+
+You can use the script below as a base:
+
+```Powershell
+$ppid = 12345
+wpr -snapshotconfig heap -pid $ppid enable
+wpr -start heapsnapshot -filemode
+
+# Ensure this command is executed right after the application starts, before any significant memory allocations occur
+wpr -singlesnapshot heap $ppid
+#  Execute this command again whenever the application reaches a critical or interesting state
+wpr -singlesnapshot heap $ppid
+
+wpr -stop heapsnapshot.etl
+wpr -snapshotconfig heap -pid $ppid disable
+```
