@@ -24,12 +24,11 @@ wpa heapsnapshot.etl
 1. Open the `.etl` file in Windows Performance Analyzer (WPA).
 2. Add the path to debug symbols:
     - Go to `Trace -> Configure Symbols Path -> Add Entry`.
-    - ![path to debug symbols](screenshots/1.png)
-    - ![path to debug symbols](screenshots/2.png)
+    - <img src="screenshots/1.png" alt="path to debug symbols" height="100"> <img src="screenshots/2.png" alt="path to debug symbols" height="100">
 3. Load symbols:
     - Go to `Trace -> Load Symbols`.
 4. Dive into captured stacks:
     - Navigate to `Graph Explorer -> Memory -> Heap Snapshot`.
-    - ![stacks](screenshots/3.png)
+    - <img src="screenshots/3.png" alt="stacks" height="100">
 
 In the `Analysis` window, you will see all snapshots created by wpr. You can expand each snapshot to see all recorded allocations that were not freed at the moment of snapshot creation. It shows the stack where the allocation happened, the number of allocations, and the size.
