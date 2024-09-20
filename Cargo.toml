@@ -1,0 +1,10 @@
+[package]
+name = "rust-wpr"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+is_elevated = "0.1.2"
+
+[profile.release]
+debug = "full" # enable symbols for release build
